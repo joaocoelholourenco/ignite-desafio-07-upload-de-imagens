@@ -42,7 +42,7 @@ export function ModalViewImage({
           />
         </ModalBody>
         <ModalFooter height="32px">
-          <Link href={imgUrl} fontSize="14px">
+          <Link href={imgUrl} fontSize="14px" isExternal>
             Abrir original
           </Link>
         </ModalFooter>

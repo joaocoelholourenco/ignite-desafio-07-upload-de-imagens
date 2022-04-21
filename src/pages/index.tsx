@@ -18,19 +18,18 @@ export default function Home(): JSX.Element {
     hasNextPage,
   } = useInfiniteQuery(
     'images',
-    ({ pageParam = null }) => {
-      return api
-        .get('/api/images', {
-          params: { after: pageParam },
-        })
-        .then(response => response.data);
+    async ({ pageParam = null }) => {
+      const response = await api.get('api/images', {
+        params: { after: pageParam },
+      });
+      return response.data;
     },
     {
       getNextPageParam: ({ after }) => after || null,
     }
   );
   const formattedData = useMemo(
-    () => data?.pages.map(page => page.data.flat()).flat(),
+    () => data?.pages.flatMap(page => page.data.flat()),
     [data]
   );
 
